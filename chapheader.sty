@@ -1,0 +1,50 @@
+\usepackage{mintoc}
+
+\newcounter{chapitre}
+
+\makeatletter
+
+\DeclareFixedFont{\chaptitfont}{T1}{phv}{bc}{n}{18pt}
+\DeclareFixedFont{\chapnumfont}{T1}{phv}{bc}{n}{50pt}
+\DeclareFixedFont{\chapfont}{T1}{phv}{b}{n}{22pt}
+
+\newenvironment{cadrechap}{\begin{list}{}{
+    \setlength{\leftmargin}{0pt}
+    \setlength{\rightmargin}{-2cm}
+    \setlength{\itemindent}{0pt}
+    \setlength{\labelsep}{0pt}
+}\item}{\end{list}}
+
+\renewcommand{\chapter}{
+    \cleardoublepage
+    \stepcounter{chapitre}
+    \thispagestyle{plain}
+    \global\@topnum\z@
+    \@afterindentfalse
+    \secdef\@chapter\@schapter
+}
+
+\renewcommand{\@makechapterhead}[1]{
+    \begin{cadrechap}
+        \chaptitfont\chaptertitlename
+        \chapnumfont\thechapter
+        %\hfill
+        {\chapfont#1}
+    \end{cadrechap}
+    \vspace{1cm}
+    %\par\mintoc
+}
+
+\renewcommand{\@makeschapterhead}[1]{
+    %
+}
+
+%\titleformat{\chapter}[display]
+%{\fontsize{25pt}{10pt}\selectfont \bfseries}%format
+%{\rightline{\chaptertitlename\ \thechapter\ :\newline \vspace{20pt} #1}}%label
+%{5pt}%sep
+%{\tiny}
+%{\huge}
+
+
+\makeatother
