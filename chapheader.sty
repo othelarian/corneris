@@ -1,19 +1,18 @@
-\usepackage{mintoc}
+\ProvidesPackage{chapheader}
+
+\RequirePackage{etoc}
+\RequirePackage{boxedminipage}
+\RequirePackage{fullminipage}
 
 \newcounter{chapitre}
 
 \makeatletter
 
-\DeclareFixedFont{\chaptitfont}{T1}{phv}{bc}{n}{18pt}
-\DeclareFixedFont{\chapnumfont}{T1}{phv}{bc}{n}{50pt}
-\DeclareFixedFont{\chapfont}{T1}{phv}{b}{n}{22pt}
+\DeclareFixedFont{\chaptitfont}{T1}{pbk}{b}{n}{18pt}
+\DeclareFixedFont{\chapnumfont}{T1}{pbk}{b}{n}{50pt}
+\DeclareFixedFont{\chapfont}{T1}{phv}{b}{n}{24pt}
 
-\newenvironment{cadrechap}{\begin{list}{}{
-    \setlength{\leftmargin}{0pt}
-    \setlength{\rightmargin}{-2cm}
-    \setlength{\itemindent}{0pt}
-    \setlength{\labelsep}{0pt}
-}\item}{\end{list}}
+\DeclareFixedFont{\chaptxtfont}{T1}{pbk}{m}{it}{14pt}
 
 \renewcommand{\chapter}{
     \cleardoublepage
@@ -25,26 +24,27 @@
 }
 
 \renewcommand{\@makechapterhead}[1]{
-    \begin{cadrechap}
-        \chaptitfont\chaptertitlename
-        \chapnumfont\thechapter
-        %\hfill
-        {\chapfont#1}
-    \end{cadrechap}
-    \vspace{1cm}
-    %\par\mintoc
+    \begin{boxedminipage}[lt]{.45\linewidth}
+        {Sommaire}
+        \localtableofcontents
+    \end{boxedminipage}
+    \begin{minipage}[rt]{.45\linewidth}
+        \vspace{2cm}
+        \begin{flushright}
+            \chaptitfont\chaptertitlename\ 
+            \chapnumfont\Roman{chapter}
+            \linebreak
+            \vspace{0.5cm}
+            \linebreak
+            {\chapfont#1}
+            \linebreak
+        \end{flushright}
+    \end{minipage}
+    \vspace{2cm}
 }
 
 \renewcommand{\@makeschapterhead}[1]{
-    %
 }
-
-%\titleformat{\chapter}[display]
-%{\fontsize{25pt}{10pt}\selectfont \bfseries}%format
-%{\rightline{\chaptertitlename\ \thechapter\ :\newline \vspace{20pt} #1}}%label
-%{5pt}%sep
-%{\tiny}
-%{\huge}
 
 
 \makeatother
